@@ -86,9 +86,17 @@ Car.prototype.fill = function(gallons) {
 }
 
 Car.prototype.drive = function(distance) {
-  this.odometer = this.odometer + distance;
-  this.tank = this.tank - (distance/this.milesPerGallon);
+  if(this.tank <= distance / this.milesPerGallon){
+    this.odometer += this.tank * this.milesPerGallon
+    this.tank = 0
+    return `I ran out of fuel at ${this.odometer} miles!`
+  }else{
+    this.odometer += distance
+    this.tank -= distance / this.milesPerGallon;
+  }
 }
+
+
 
 /*
   TASK 3
@@ -115,10 +123,10 @@ Baby.prototype.play = function() {
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. Global Object - When a function is called in a global scope,  the value of this inside of a function will be the object.
+  2. Implicit binding - When an object is called by a preceding dot, the object before the dot is "this".
+  3. Explict Binding - This refers to the object passed in instead of the object before the dot.
+  4. the "new" keyword - When a constructor is used, "this" is refers to the instance of the object that is created and returned by the constructor.
 */
 
 
